@@ -1,0 +1,21 @@
+.custom-table thead th {
+  font-size: 0.875rem;
+  letter-spacing: 0.5px;
+  padding: 1.3rem !important;
+}
+
+.custom-table > tbody > tr > td:first-child {
+  padding-left: 1rem;
+}
+
+.custom-table tbody td {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  vertical-align: middle;
+}
+
+#nprogress .bar {
+  background: #3874ff !important; /* Ganti dengan warna favorit (hijau dalam contoh ini) */
+  height: 4px !important;
+}
+

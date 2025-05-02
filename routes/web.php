@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Apps\CategoryController;
 use App\Http\Controllers\Apps\DashboardController;
 use App\Http\Controllers\Apps\SupplierController;
 use App\Http\Controllers\Auth\LoginController;
@@ -23,7 +24,9 @@ Route::middleware('auth')->get('logout', [LoginController::class, 'logout'])->na
 Route::middleware(['auth'])->prefix('app')->name('app.')->group(function () {
     Route::resource('dashboard', DashboardController::class);
     Route::resource('suppliers', SupplierController::class);
+    Route::resource('categories', CategoryController::class);
     Route::post('/suppliers/datatable', [SupplierController::class, 'datatable'])->name('suppliers.datatable');
+    Route::post('/categories/datatable', [CategoryController::class, 'datatable'])->name('categories.datatable');
 });
 
 Route::middleware(['auth'])->prefix('user-management')->name('user-management.')->group(function () {

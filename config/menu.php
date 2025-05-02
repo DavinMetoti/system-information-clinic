@@ -17,6 +17,12 @@ return [
                     'father' => '',
                     'route' => 'app.suppliers.index',
                 ],
+                [
+                    'title' => 'Categories',
+                    'icon' => 'fas fa-boxes',
+                    'father' => '',
+                    'route' => 'app.categories.index',
+                ],
             ],
         ],
         [

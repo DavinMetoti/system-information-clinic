@@ -2,13 +2,13 @@
 
 @section('main')
     <x-breadcrumb :items="[
-        ['title' => 'User Management', 'url' => route('app.categories.index')],
+        ['title' => 'Categories', 'url' => route('app.categories.index')],
         ['title' => 'Add Category', 'url' => '#']
     ]" />
 
     <div class="card w-100">
         <div class="card-header pb-0">
-            <h3>Register a New Account</h3>
+            <h3>Register a New Category</h3>
             <p>Fill in the form to create a new account.</p>
         </div>
         <div class="card-body">

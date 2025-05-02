@@ -11,6 +11,12 @@ return [
                     'father' => 'grid',
                     'route' => 'app.dashboard.index',
                 ],
+                [
+                    'title' => 'Suppliers',
+                    'icon' => 'fas fa-boxes',
+                    'father' => '',
+                    'route' => 'app.suppliers.index',
+                ],
             ],
         ],
         [

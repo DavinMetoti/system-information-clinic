@@ -7,9 +7,10 @@ use Illuminate\Support\ServiceProvider;
 // Interfaces
 use App\Http\Contracts\Auth\RegisterRepositoryInterface;
 use App\Http\Contracts\Auth\LoginRepositoryInterface;
-
+use App\Http\Contracts\Apps\SupplierRepositoryInterface;
 // Repository
 use App\Http\Repositories\Auth\RegisterRepository;
+use App\Http\Repositories\Apps\SupplierRepository;
 use App\Http\Repositories\Auth\LoginRepository;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +20,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        // Apps
+        $this->app->bind(SupplierRepositoryInterface::class, SupplierRepository::class);
+
+        // Auth
         $this->app->bind(RegisterRepositoryInterface::class, RegisterRepository::class);
         $this->app->bind(LoginRepositoryInterface::class, LoginRepository::class);
 

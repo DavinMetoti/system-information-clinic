@@ -33,7 +33,7 @@
                                             </a>
                                             <h3 class="text-body-highlight">Sign In</h3>
                                             <p class="text-body-tertiary">Get access to your account</p>
-                                            @if ($errors->has('login.index'))
+                                            @if ($errors->has('login'))
                                                 <div class="alert alert-outline-danger p-2" role="alert">
                                                     {{ $errors->first('login') }}
                                                 </div>

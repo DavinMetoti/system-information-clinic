@@ -40,8 +40,6 @@ export class TableManager {
                     'X-CSRF-TOKEN': this.csrfToken
                 },
                 data: function (d) {
-                    console.log("DataTables AJAX request data:", d);
-
                     return Object.assign(d, ajaxData);
                 },
                 error: function (xhr, error, thrown) {
@@ -62,7 +60,7 @@ export class TableManager {
     bindEvents() {
         const self = this;
 
-        if (this.eventHandlers.delete) {
+        if (this.eventHandlers.edit) {
             $(document).on('click', `.btn-${this.entity}-edit`, function () {
                 const id = $(this).data('id');
 

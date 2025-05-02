@@ -49,4 +49,14 @@ class LoginController extends Controller
             'login' => 'The provided credentials are incorrect.',
         ]);
     }
+
+    public function logout()
+    {
+        if ($this->loginRepository->logout()) {
+            return redirect()->route('login');
+        }
+
+        return redirect()->back()->withErrors(['logout' => 'Gagal logout. Silakan coba lagi.']);
+    }
+
 }

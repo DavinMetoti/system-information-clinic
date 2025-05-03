@@ -10,8 +10,8 @@
         <div class="card-header pb-0">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <h3>User Management</h3>
-                    <p>Manage user accounts and add new users.</p>
+                    <h3>Category Management</h3>
+                    <p>Manage categories and add new categories.</p>
                 </div>
                 <button class="btn btn-primary" id="btn-categories-add"><i class="fas fa-plus me-2"></i>Add Category</button>
             </div>

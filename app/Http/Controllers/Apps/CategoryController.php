@@ -74,7 +74,8 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        return view('pages.content.category.edit');
+        $category = $this->categoryRepo->find($id);
+        return view('pages.content.category.edit', compact('category'));
     }
 
     /**

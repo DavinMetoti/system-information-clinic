@@ -17,8 +17,8 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="table-responsive">
-                <table id="suppliers_table" class="table table-sm table-striped fs-9 mb-0 custom-table">
+            <div class="table-responsive min-vh-50">
+                <table id="suppliers_table" class="table table-sm table-striped fs-9 mb-0 custom-table w-100">
                     <thead>
                         <tr>
                             <th>Logo</th>
@@ -65,7 +65,11 @@
                             width: '10%',
                             render: function (data, type, row) {
                                 if (data) {
-                                    return `<img src="data:image/png;base64,${data}" alt="Logo" style="max-width: 50px;">`;
+                                    if (row.logo_extentions === 'svg') {
+                                        return `<img src="data:image/svg+xml;base64,${data}" alt="Logo" style="max-width: 50px;">`;
+                                    } else {
+                                        return `<img src="data:image/${row.logo_extentions};base64,${data}" alt="Logo" style="max-width: 50px;">`;
+                                    }
                                 }
                                 else {
                                     const avatar = new App.LetterAvatar(row.name);
@@ -98,15 +102,21 @@
                             render: function (data, type, row) {
                                 return `
                                     <div class="dropdown">
-                                        <button class="btn btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button class="btn btn-sm" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                                             <i class="fas fa-ellipsis"></i>
                                         </button>
-                                        <ul class="dropdown-menu">
+                                        <ul class="dropdown-menu dropdown-menu-end" stye="z-index: 9999">
+                                            <li>
+                                                <a class="dropdown-item btn-suppliers-show" href="#" data-id="${row.id}">
+                                                    <i class="fas fa-eye me-2 text-secondary"></i> Show
+                                                </a>
+                                            </li>
                                             <li>
                                                 <a class="dropdown-item btn-suppliers-edit" href="#" data-id="${row.id}">
                                                     <i class="fas fa-edit me-2 text-primary"></i> Edit
                                                 </a>
                                             </li>
+                                            <li><hr class="dropdown-divider"></li>
                                             <li>
                                                 <a class="dropdown-item btn-suppliers-delete" href="#" data-id="${row.id}">
                                                     <i class="fas fa-trash-alt me-2 text-danger"></i> Delete
@@ -120,6 +130,9 @@
                     ]
                 },
                 on: {
+                    show: function () {
+
+                    },
                     edit: function () {
 
                     },

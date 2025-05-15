@@ -27,6 +27,7 @@ class Supplier extends Model
         'is_active',
         'created_by',
         'updated_by',
+        'logo_extentions',
     ];
 
     /**

@@ -23,13 +23,18 @@
     <link href="{{ secure_asset('vendors/leaflet/leaflet.css') }}" rel="stylesheet">
     <link href="{{ secure_asset('vendors/leaflet.markercluster/MarkerCluster.css') }}" rel="stylesheet">
     <link href="{{ secure_asset('vendors/leaflet.markercluster/MarkerCluster.Default.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendors/dropzone/dropzone.css') }}" rel="stylesheet">
     <link href="https://cdn.datatables.net/2.2.2/css/dataTables.bootstrap5.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="{{ secure_asset('assets/js/config.js') }}"></script>
     <script src="{{ secure_asset('vendors/simplebar/simplebar.min.js') }}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs5.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs5.min.js"></script>
 
 </head>
 <body>
@@ -56,15 +61,27 @@
     <script src="{{ secure_asset('assets/js/dashboards/ecommerce-dashboard.js')}}"></script>
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js"></script>
+    <script src="{{ secure_asset('vendors/dropzone/dropzone-min.js')}}"></script>
+
     <script type="module" src="{{ secure_asset('assets/js/modules/renderer.js')}}"></script>
 
     <script>
         NProgress.start();
 
-        // Selesai saat semua konten (termasuk gambar) sudah dimuat
         window.addEventListener('load', function () {
             NProgress.done();
+
+            document.getElementById('skeleton-loader').style.display = 'none';
+            document.getElementById('actual-content').style.display = 'block';
+        });
+
+        $(document).ready(function () {
+            $('.currency').mask('000.000.000.000', {reverse: true});
         });
     </script>
+
 </body>
 </html>

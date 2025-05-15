@@ -43,9 +43,19 @@ class CategoryRepository implements CategoryRepositoryInterface
             ->make(true);
     }
 
-
     public function find(int $id)
     {
         return Category::find($id);
+    }
+
+    public function getLimitedWithSearch(?string $search = '')
+    {
+        $query = Category::query();
+
+        if (!empty($search)) {
+            $query->where('name', 'like', '%' . $search . '%');
+        }
+
+        return $query->limit(10)->get();
     }
 }

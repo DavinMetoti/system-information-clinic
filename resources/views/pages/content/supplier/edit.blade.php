@@ -106,16 +106,19 @@
 
                 if (logoFile) {
                     const reader = new FileReader();
+                    let logoExtension = logoFile.name.split('.').pop();
 
                     reader.onloadend = function () {
                         let base64Logo = reader.result.split(',')[1];
                         formData.append('logo', base64Logo);
+                        formData.append('logo_extentions', logoExtension);
 
                         sendFormData(formData);
                     };
 
                     reader.readAsDataURL(logoFile);
                 } else {
+                    formData.append('logo_extentions', null);
                     sendFormData(formData);
                 }
 

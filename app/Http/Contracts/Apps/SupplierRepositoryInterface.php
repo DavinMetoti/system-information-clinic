@@ -46,4 +46,12 @@ interface SupplierRepositoryInterface
      * @return \App\Models\Supplier|null
      */
     public function find(int $id);
+
+    /**
+     * Get limited supplier with optional search.
+     *
+     * @param string $search
+     * @return \Illuminate\Support\Collection
+     */
+    public function getLimitedWithSearch(?string $search = null);
 }

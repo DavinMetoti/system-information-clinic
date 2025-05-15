@@ -24,6 +24,7 @@ class UpdateRequest extends FormRequest
         return [
             'name'            => 'required|string|max:255',
             'logo'            => 'nullable|string',
+            'logo_extentions'  => 'nullable|string',
             'description'     => 'required|string',
             'address'         => 'required|string',
             'phone'           => 'required|string|max:20',

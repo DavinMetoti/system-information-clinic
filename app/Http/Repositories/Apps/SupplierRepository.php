@@ -68,9 +68,19 @@ class SupplierRepository implements SupplierRepositoryInterface
             ->make(true);
     }
 
-
     public function find(int $id)
     {
         return Supplier::find($id);
+    }
+
+    public function getLimitedWithSearch(?string $search = '')
+    {
+        $query = Supplier::query();
+
+        if (!empty($search)) {
+            $query->where('name', 'like', '%' . $search . '%');
+        }
+
+        return $query->limit(10)->get();
     }
 }

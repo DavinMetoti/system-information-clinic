@@ -28434,7 +28434,6 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical.navbar-expand-xs .navbar-v
 }
 .navbar-vertical .navbar-vertical-content .navbar-nav .nav-link.active {
   color: var(--phoenix-navbar-vertical-link-active-color);
-  background-color: var(--phoenix-blue-light);
   border: 2px solid var(--phoenix-blue);
   border-radius: 7px;
 }

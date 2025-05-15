@@ -6,6 +6,7 @@ export class TableManager {
         this.datatableOptions = options.datatable || {};
         this.eventHandlers = options.on || {};
         this.tableInstance = null;
+        this.filter = null; // Add a filter property
 
         this.init();
     }
@@ -34,12 +35,16 @@ export class TableManager {
             processing: dtOptions.processing || true,
             serverSide: dtOptions.serverSide || true,
             ajax: {
-                url: dtOptions.api+'/datatable' || this.restApi,
+                url: `${dtOptions.api}/datatable`, // Ensure the base URL points to the datatable endpoint
                 type: dtOptions.ajaxType || 'POST',
                 headers: {
                     'X-CSRF-TOKEN': this.csrfToken
                 },
-                data: function (d) {
+                data: (d) => {
+                    // Include the filter in the AJAX request
+                    if (this.filter) {
+                        d.filter = this.filter;
+                    }
                     return Object.assign(d, ajaxData);
                 },
                 error: function (xhr, error, thrown) {
@@ -78,6 +83,14 @@ export class TableManager {
                         self.tableInstance.ajax.reload();
                     });
                 }
+            });
+        }
+
+        if (this.eventHandlers.show) {
+            $(document).on('click', `.btn-${this.entity}-show`, function () {
+                const id = $(this).data('id');
+                const url = `${self.restApi}/${id}`;
+                window.location.href = url;
             });
         }
 
@@ -122,9 +135,15 @@ export class TableManager {
         });
     }
 
-    reload() {
+    reload(options = {}) {
+        // Update the filter if provided
+        if (options.filter !== undefined) {
+            this.filter = options.filter; // Update the filter property
+        }
+
+        // Reload the table
         if (this.tableInstance) {
-            this.tableInstance.ajax.reload();
+            this.tableInstance.ajax.reload(null, false); // Pass `false` to prevent resetting pagination
         }
     }
 

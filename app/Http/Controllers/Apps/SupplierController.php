@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Apps;
 use App\Http\Contracts\Apps\SupplierRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Apps\Supplier\StoreRequest;
+use App\Http\Requests\Apps\Supplier\UpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -67,18 +68,9 @@ class SupplierController extends Controller
      */
     public function show(string $id)
     {
-        try {
-            $supplier = $this->supplierRepo->find($id);
-            return response()->json([
-                'message' => 'Supplier retrieved successfully!',
-                'supplier' => $supplier,
-            ], Response::HTTP_OK);
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Failed to retrieve supplier!',
-                'error' => $e->getMessage(),
-            ], Response::HTTP_NOT_FOUND);
-        }
+        $supplier = $this->supplierRepo->find($id);
+
+        return view('pages.content.supplier.show', compact('supplier'));
     }
 
     /**
@@ -97,13 +89,9 @@ class SupplierController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRequest $request, string $id)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'is_active' => 'nullable|boolean',
-        ]);
+        $validated = $request->validated();
 
         try {
             $supplier = $this->supplierRepo->update($id, $validated);
@@ -139,5 +127,27 @@ class SupplierController extends Controller
 
     public function datatable(Request $request) {
         return $this->supplierRepo->datatable($request);
+    }
+
+    public function select(Request $request)
+    {
+        try {
+            $search = $request->get('search', '');
+            $suppliers = $this->supplierRepo->getLimitedWithSearch($search);
+
+            $results = collect($suppliers)->map(function ($supplier) {
+                return [
+                    'id' => $supplier->id,
+                    'text' => $supplier->name,
+                ];
+            });
+            return response()->json([
+                'results' => $results
+            ], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage(),
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

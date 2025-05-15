@@ -122,4 +122,28 @@ class CategoryController extends Controller
     {
         return $this->categoryRepo->datatable($request);
     }
+
+    public function select(Request $request)
+    {
+        try {
+            $search = $request->get('search', '');
+            $categories = $this->categoryRepo->getLimitedWithSearch($search);
+
+            $results = collect($categories)->map(function ($category) {
+                return [
+                    'id' => $category->id,
+                    'text' => $category->name,
+                ];
+            });
+
+            return response()->json([
+                'results' => $results
+            ], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage(),
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

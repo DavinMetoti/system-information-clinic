@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Apps\CategoryController;
 use App\Http\Controllers\Apps\DashboardController;
+use App\Http\Controllers\Apps\ProductController;
 use App\Http\Controllers\Apps\SupplierController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -25,11 +26,19 @@ Route::middleware(['auth'])->prefix('app')->name('app.')->group(function () {
     Route::resource('dashboard', DashboardController::class);
     Route::resource('suppliers', SupplierController::class);
     Route::resource('categories', CategoryController::class);
+
+    Route::get('/products/counts', [ProductController::class, 'counts'])->name('products.counts');
+
+    Route::resource('products', ProductController::class);
     Route::post('/suppliers/datatable', [SupplierController::class, 'datatable'])->name('suppliers.datatable');
     Route::post('/categories/datatable', [CategoryController::class, 'datatable'])->name('categories.datatable');
+    Route::post('/products/datatable', [ProductController::class, 'datatable'])->name('products.datatable');
+    Route::post('/categories/select', [CategoryController::class, 'select'])->name('categories.select');
+    Route::post('/suppliers/select', [SupplierController::class, 'select'])->name('suppliers.select');
 });
 
 Route::middleware(['auth'])->prefix('user-management')->name('user-management.')->group(function () {
     Route::resource('users', RegisterController::class);
     Route::post('/users/datatable', [RegisterController::class, 'datatable'])->name('users.datatable');
 });
+

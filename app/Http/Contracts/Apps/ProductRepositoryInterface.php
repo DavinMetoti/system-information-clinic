@@ -4,27 +4,27 @@ namespace App\Http\Contracts\Apps;
 
 use Illuminate\Http\Request;
 
-interface CategoryRepositoryInterface
+interface ProductRepositoryInterface
 {
     /**
-     * Store a new category.
+     * Store a new prodyct.
      *
      * @param array $data
-     * @return \App\Models\category
+     * @return \App\Models\Product
      */
     public function store(array $data);
 
     /**
-     * Update an existing category.
+     * Update an existing prodyct.
      *
      * @param int $id
      * @param array $data
-     * @return \App\Models\category
+     * @return \App\Models\Product
      */
     public function update(int $id, array $data);
 
     /**
-     * Delete a category.
+     * Delete a prodyct.
      *
      * @param int $id
      * @return bool
@@ -40,18 +40,31 @@ interface CategoryRepositoryInterface
     public function datatable(Request $request);
 
     /**
-     * Find a category by ID.
+     * Find a Product by ID.
      *
      * @param int $id
-     * @return \App\Models\category|null
+     * @return \App\Models\Product|null
      */
     public function find(int $id);
 
     /**
-     * Get limited categories with optional search.
+     * Count all products.
      *
-     * @param string $search
-     * @return \Illuminate\Support\Collection
+     * @return int
      */
-    public function getLimitedWithSearch(?string $search = null);
+    public function countAll();
+
+    /**
+     * Count draft products.
+     *
+     * @return int
+     */
+    public function countDraft();
+
+    /**
+     * Count published products.
+     *
+     * @return int
+     */
+    public function countPublished();
 }

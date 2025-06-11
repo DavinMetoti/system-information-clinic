@@ -11,6 +11,25 @@
 
 ---
 
+## ✅ Requirement
+
+Pastikan sistem kamu memenuhi spesifikasi minimum berikut agar aplikasi dapat berjalan dengan baik:
+
+| Komponen      | Versi Minimum          |
+|---------------|------------------------|
+| PHP           | ^8.3                   |
+| Composer      | ^2.0                   |
+| Node.js       | ^20.x                  |
+| NPM           | ^9.x                   |
+| MySQL/MariaDB | 5.7+ / 10.3+           |
+| Laravel       | 12.x                   |
+| Web Server    | Herd, XAMPP, Laragon, Apache2, NGINX  |
+
+> **Catatan:** Laravel 12 membutuhkan PHP 8.3 atau lebih baru. Pastikan ada ekstensi PHP seperti `pdo`, `mbstring`, `openssl`, `tokenizer`, dan `fileinfo`.
+
+
+---
+
 ## 🚀 Langkah Instalasi
 
 1. **Clone repository**

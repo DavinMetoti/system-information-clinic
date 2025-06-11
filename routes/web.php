@@ -1,19 +1,19 @@
 <?php
 
-use App\Http\Controllers\Apps\CategoryController;
 use App\Http\Controllers\Apps\DashboardController;
-use App\Http\Controllers\Apps\ProductController;
-use App\Http\Controllers\Apps\SupplierController;
+use App\Http\Controllers\Apps\DoctorManagementController;
+use App\Http\Controllers\Apps\SpecializationController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
-// Root route: arahkan sesuai status login
 Route::get('/', function () {
     return auth()->check()
         ? redirect()->route('app.dashboard.index')
         : redirect()->route('login');
 });
+Route::resource('register', RegisterController::class);
+
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [LoginController::class, 'index'])->name('login');
@@ -24,21 +24,19 @@ Route::middleware('auth')->get('logout', [LoginController::class, 'logout'])->na
 
 Route::middleware(['auth'])->prefix('app')->name('app.')->group(function () {
     Route::resource('dashboard', DashboardController::class);
-    Route::resource('suppliers', SupplierController::class);
-    Route::resource('categories', CategoryController::class);
-
-    Route::get('/products/counts', [ProductController::class, 'counts'])->name('products.counts');
-
-    Route::resource('products', ProductController::class);
-    Route::post('/suppliers/datatable', [SupplierController::class, 'datatable'])->name('suppliers.datatable');
-    Route::post('/categories/datatable', [CategoryController::class, 'datatable'])->name('categories.datatable');
-    Route::post('/products/datatable', [ProductController::class, 'datatable'])->name('products.datatable');
-    Route::post('/categories/select', [CategoryController::class, 'select'])->name('categories.select');
-    Route::post('/suppliers/select', [SupplierController::class, 'select'])->name('suppliers.select');
 });
 
-Route::middleware(['auth'])->prefix('user-management')->name('user-management.')->group(function () {
-    Route::resource('users', RegisterController::class);
-    Route::post('/users/datatable', [RegisterController::class, 'datatable'])->name('users.datatable');
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('doctor-management', DoctorManagementController::class);
+    Route::resource('specialization', SpecializationController::class);
+});
+
+Route::middleware(['auth'])->prefix('datatable')->name('datatable.')->group(function () {
+    Route::post('doctor', [DoctorManagementController::class, 'datatable'])->name('doctor');
+    Route::post('specialization', [SpecializationController::class, 'datatable'])->name('specialization');
+});
+
+Route::middleware(['auth'])->prefix('search')->name('search.')->group(function () {
+    Route::post('specialization', [SpecializationController::class, 'select'])->name('specialization');
 });
 

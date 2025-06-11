@@ -10,37 +10,40 @@ return [
                     'icon' => '',
                     'father' => 'grid',
                     'route' => 'app.dashboard.index',
-                ],
-                [
-                    'title' => 'Suppliers',
-                    'icon' => 'fas fa-truck',
-                    'father' => '',
-                    'route' => 'app.suppliers.index',
-                ],
-                [
-                    'title' => 'Categories',
-                    'icon' => 'fas fa-tags',
-                    'father' => '',
-                    'route' => 'app.categories.index',
-                ],
-                [
-                    'title' => 'Products',
-                    'icon' => 'fas fa-box',
-                    'father' => '',
-                    'route' => 'app.products.index',
+                    'permission' => null,
                 ],
             ],
         ],
         [
-            'title' => 'User Management',
+            'title' => 'Admin',
             'children' => [
                 [
-                    'title' => 'User',
-                    'icon' => 'fas fa-users-cog', // Ikon manajemen pengguna
+                    'title' => 'Doctor Managements',
+                    'icon' => 'fas fa-user-md',
                     'father' => '',
-                    'route' => 'user-management.users.index',
+                    'route' => 'admin.doctor-management.index',
+                    'permission' => 'manage doctors',
+                ],
+                [
+                    'title' => 'Specializations',
+                    'icon' => 'fas fa-stethoscope',
+                    'father' => '',
+                    'route' => 'admin.specialization.index',
+                    'permission' => 'manage doctors',
                 ],
             ],
         ],
+        [
+            'title' => 'Dokter',
+            'children' => [
+                [
+                    'title' => 'Medical Records',
+                    'icon' => 'fas fa-clipboard',
+                    'father' => '',
+                    'route' => 'admin.specialization.index',
+                    'permission' => 'manage medical records',
+                ],
+            ],
+        ]
     ],
 ];

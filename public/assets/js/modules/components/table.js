@@ -35,13 +35,12 @@ export class TableManager {
             processing: dtOptions.processing || true,
             serverSide: dtOptions.serverSide || true,
             ajax: {
-                url: `${dtOptions.api}/datatable`, // Ensure the base URL points to the datatable endpoint
+                url: `/datatable/${this.entity}`,
                 type: dtOptions.ajaxType || 'POST',
                 headers: {
                     'X-CSRF-TOKEN': this.csrfToken
                 },
                 data: (d) => {
-                    // Include the filter in the AJAX request
                     if (this.filter) {
                         d.filter = this.filter;
                     }
@@ -78,6 +77,7 @@ export class TableManager {
         if (this.eventHandlers.delete) {
             $(document).on('click', `.btn-${this.entity}-delete`, function () {
                 const id = $(this).data('id');
+
                 if (confirm('Are you sure you want to delete this item?')) {
                     self.delete(id).then(() => {
                         self.tableInstance.ajax.reload();
@@ -118,20 +118,22 @@ export class TableManager {
     }
 
     delete(id) {
-        return $.ajax({
-            url: `${this.restApi}/${id}`,
-            method: 'DELETE',
-            headers: {
-                'X-CSRF-TOKEN': this.csrfToken
-            },
-            success: (response) => {
-                this.handleSuccess(response);
-                resolve(response);
-            },
-            error: (xhr) => {
-                this.handleError(xhr);
-                reject(xhr);
-            }
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: `${this.restApi}/${id}`,
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': this.csrfToken
+                },
+                success: (response) => {
+                    this.handleSuccess(response);
+                    resolve(response);
+                },
+                error: (xhr) => {
+                    this.handleError(xhr);
+                    reject(xhr);
+                }
+            });
         });
     }
 
@@ -155,7 +157,9 @@ export class TableManager {
             delay: 5000
         });
 
-        $(this.formElement)[0].reset();
+        if (this.formElement && $(this.formElement).length > 0) {
+            $(this.formElement)[0].reset();
+        }
     }
 
     handleError(xhr) {

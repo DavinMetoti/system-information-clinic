@@ -23,6 +23,16 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'contact',
+        'address',
+        'role',
+        'gender',
+        'is_active',
+    ];
+
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     /**
@@ -46,5 +56,21 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Relasi ke UserPasien
+     */
+    public function pasien()
+    {
+        return $this->hasOne(UserPasien::class, 'user_id');
+    }
+
+    /**
+     * Relasi ke UserDoctor
+     */
+    public function doctor()
+    {
+        return $this->hasOne(UserDoctor::class, 'user_id');
     }
 }

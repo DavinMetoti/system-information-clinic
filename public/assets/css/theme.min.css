@@ -36355,7 +36355,7 @@ a[href].bg-body-secondary:hover, a[href].bg-body-secondary:focus {
 }
 @media (min-width: 1540px) {
   .auth-card .auth-form-box {
-    max-width: 25rem;
+    max-width: 35rem;
   }
 }
 

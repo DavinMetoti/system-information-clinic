@@ -12,23 +12,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
 
     <!-- Style CSS -->
-    <link href="{{ secure_asset('assets/css/theme.min.css') }}" type="text/css" rel="stylesheet" id="style-default">
-    <link href="{{ secure_asset('assets/css/custom-style.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/theme.min.css') }}" type="text/css" rel="stylesheet" id="style-default">
+    <link href="{{ asset('assets/css/custom-style.css') }}" rel="stylesheet">
 
     <!-- Icon -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 
     <!-- Vendor -->
-    <link href="{{ secure_asset('vendors/simplebar/simplebar.min.css') }}" rel="stylesheet">
-    <link href="{{ secure_asset('vendors/leaflet/leaflet.css') }}" rel="stylesheet">
-    <link href="{{ secure_asset('vendors/leaflet.markercluster/MarkerCluster.css') }}" rel="stylesheet">
-    <link href="{{ secure_asset('vendors/leaflet.markercluster/MarkerCluster.Default.css') }}" rel="stylesheet">
-    <link href="{{ secure_asset('vendors/dropzone/dropzone.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendors/simplebar/simplebar.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendors/leaflet/leaflet.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendors/leaflet.markercluster/MarkerCluster.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendors/leaflet.markercluster/MarkerCluster.Default.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendors/dropzone/dropzone.css') }}" rel="stylesheet">
     <link href="https://cdn.datatables.net/2.2.2/css/dataTables.bootstrap5.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="{{ secure_asset('assets/js/config.js') }}"></script>
-    <script src="{{ secure_asset('vendors/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/js/config.js') }}"></script>
+    <script src="{{ asset('vendors/simplebar/simplebar.min.js') }}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
@@ -44,29 +44,29 @@
     <!-- ===============================================-->
     <!--    JavaScripts-->
     <!-- ===============================================-->
-    <script src="{{ secure_asset('vendors/popper/popper.min.js')}}"></script>
-    <script src="{{ secure_asset('vendors/bootstrap/bootstrap.min.js')}}"></script>
-    <script src="{{ secure_asset('vendors/anchorjs/anchor.min.js')}}"></script>
-    <script src="{{ secure_asset('vendors/is/is.min.js')}}"></script>
-    <script src="{{ secure_asset('vendors/fontawesome/all.min.js')}}"></script>
-    <script src="{{ secure_asset('vendors/lodash/lodash.min.js')}}"></script>
-    <script src="{{ secure_asset('vendors/list.js/list.min.js')}}"></script>
-    <script src="{{ secure_asset('vendors/feather-icons/feather.min.js')}}"></script>
-    <script src="{{ secure_asset('vendors/dayjs/dayjs.min.js')}}"></script>
-    <script src="{{ secure_asset('vendors/leaflet/leaflet.js')}}"></script>
-    <script src="{{ secure_asset('vendors/leaflet.markercluster/leaflet.markercluster.js')}}"></script>
-    <script src="{{ secure_asset('vendors/leaflet.tilelayer.colorfilter/leaflet-tilelayer-colorfilter.min.js')}}"></script>
-    <script src="{{ secure_asset('assets/js/phoenix.js')}}"></script>
-    <script src="{{ secure_asset('vendors/echarts/echarts.min.js')}}"></script>
-    <script src="{{ secure_asset('assets/js/dashboards/ecommerce-dashboard.js')}}"></script>
+    <script src="{{ asset('vendors/popper/popper.min.js')}}"></script>
+    <script src="{{ asset('vendors/bootstrap/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('vendors/anchorjs/anchor.min.js')}}"></script>
+    <script src="{{ asset('vendors/is/is.min.js')}}"></script>
+    <script src="{{ asset('vendors/fontawesome/all.min.js')}}"></script>
+    <script src="{{ asset('vendors/lodash/lodash.min.js')}}"></script>
+    <script src="{{ asset('vendors/list.js/list.min.js')}}"></script>
+    <script src="{{ asset('vendors/feather-icons/feather.min.js')}}"></script>
+    <script src="{{ asset('vendors/dayjs/dayjs.min.js')}}"></script>
+    <script src="{{ asset('vendors/leaflet/leaflet.js')}}"></script>
+    <script src="{{ asset('vendors/leaflet.markercluster/leaflet.markercluster.js')}}"></script>
+    <script src="{{ asset('vendors/leaflet.tilelayer.colorfilter/leaflet-tilelayer-colorfilter.min.js')}}"></script>
+    <script src="{{ asset('assets/js/phoenix.js')}}"></script>
+    <script src="{{ asset('vendors/echarts/echarts.min.js')}}"></script>
+    <script src="{{ asset('assets/js/dashboards/ecommerce-dashboard.js')}}"></script>
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap5.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js"></script>
-    <script src="{{ secure_asset('vendors/dropzone/dropzone-min.js')}}"></script>
+    <script src="{{ asset('vendors/dropzone/dropzone-min.js')}}"></script>
 
-    <script type="module" src="{{ secure_asset('assets/js/modules/renderer.js')}}"></script>
+    <script type="module" src="{{ asset('assets/js/modules/renderer.js')}}"></script>
 
     <script>
         NProgress.start();
@@ -74,8 +74,10 @@
         window.addEventListener('load', function () {
             NProgress.done();
 
-            document.getElementById('skeleton-loader').style.display = 'none';
-            document.getElementById('actual-content').style.display = 'block';
+            var skeleton = document.getElementById('skeleton-loader');
+            var content = document.getElementById('actual-content');
+            if (skeleton) skeleton.style.display = 'none';
+            if (content) content.style.display = 'block';
         });
 
         $(document).ready(function () {

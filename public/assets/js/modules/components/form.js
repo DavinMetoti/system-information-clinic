@@ -39,6 +39,10 @@ export class FormHandler {
     }
 
     setLoadingState(isLoading) {
+        let btnText = 'Create';
+        if ($(this.formElement).data('mode') === 'update' || this.submitButton.data('mode') === 'update') {
+            btnText = 'Update';
+        }
         if (isLoading) {
             this.submitButton.prop('disabled', true);
             this.submitButton.addClass(this.loadingClass);
@@ -46,7 +50,7 @@ export class FormHandler {
         } else {
             this.submitButton.prop('disabled', false);
             this.submitButton.removeClass(this.loadingClass);
-            this.submitButton.html('Update');
+            this.submitButton.html(btnText);
         }
     }
 

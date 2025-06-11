@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -15,40 +14,29 @@ class RoleAndPermissionSeeder extends Seeder
     public function run()
     {
         // Create Permissions
-        Permission::create(['name' => 'view products']);
-        Permission::create(['name' => 'create products']);
-        Permission::create(['name' => 'edit products']);
-        Permission::create(['name' => 'delete products']);
-        Permission::create(['name' => 'view sales']);
-        Permission::create(['name' => 'create sales']);
-        Permission::create(['name' => 'manage stock']);
-        Permission::create(['name' => 'view reports']);
-        Permission::create(['name' => 'create users']);
+        Permission::create(['name' => 'manage doctors']); // CRUD dokter
+        Permission::create(['name' => 'manage patients']); // CRUD pasien (opsional, jika admin perlu)
+        Permission::create(['name' => 'manage medical records']); // CRUD catatan pemeriksaan pasien
+        Permission::create(['name' => 'view own medical records']); // pasien melihat catatan sendiri
 
         // Create Roles
         $adminRole = Role::create(['name' => 'admin']);
-        $cashierRole = Role::create(['name' => 'cashier']);
-        $warehouseRole = Role::create(['name' => 'warehouse']);
-        $customerRole = Role::create(['name' => 'customer']);
+        $doctorRole = Role::create(['name' => 'dokter']);
+        $patientRole = Role::create(['name' => 'pasien']);
 
         // Assign Permissions to Roles
-        $adminRole->givePermissionTo(Permission::all());
-
-        $cashierRole->givePermissionTo([
-            'view products',
-            'create sales',
-            'view sales',
-            'manage stock',
+        $adminRole->givePermissionTo([
+            'manage doctors',
+            'manage patients',
+            'manage medical records',
         ]);
 
-        $warehouseRole->givePermissionTo([
-            'view products',
-            'manage stock',
+        $doctorRole->givePermissionTo([
+            'manage medical records',
         ]);
 
-        $customerRole->givePermissionTo([
-            'view products',
+        $patientRole->givePermissionTo([
+            'view own medical records',
         ]);
     }
-
 }

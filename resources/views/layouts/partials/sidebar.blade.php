@@ -4,12 +4,23 @@
         <div class="navbar-vertical-content">
             <ul class="navbar-nav flex-column" id="navbarVerticalNav">
                 @foreach (config('menu.sidebar') as $group)
+                    @php
+                        $hasVisibleMenu = false;
+                        foreach ($group['children'] as $menu) {
+                            if (empty($menu['permission']) || auth()->user()->can($menu['permission'])) {
+                                $hasVisibleMenu = true;
+                                break;
+                            }
+                        }
+                    @endphp
+                    @if($hasVisibleMenu)
                     <li class="nav-item">
                         <!-- Label Group -->
                         <p class="navbar-vertical-label">{{ $group['title'] }}</p>
                         <hr class="navbar-vertical-line" />
 
                         @foreach ($group['children'] as $menu)
+                            @if(empty($menu['permission']) || auth()->user()->can($menu['permission']))
                             <div class="nav-item-wrapper">
                                 <a class="nav-link label-1 {{ request()->routeIs($menu['route']) ? 'active' : '' }}"
                                 href="{{ route($menu['route']) }}"
@@ -28,8 +39,10 @@
                                     </div>
                                 </a>
                             </div>
+                            @endif
                         @endforeach
                     </li>
+                    @endif
                 @endforeach
             </ul>
         </div>

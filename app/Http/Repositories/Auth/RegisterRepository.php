@@ -20,10 +20,24 @@ class RegisterRepository implements RegisterRepositoryInterface
             $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
-                'password' => Hash::make($data['password']),
+                'password' => \Illuminate\Support\Facades\Hash::make($data['password']),
+                'contact' => $data['contact'] ?? null,
+                'address' => $data['address'] ?? null,
+                'gender' => $data['gender'] ?? null,
             ]);
 
-            $user->assignRole($data['role']);
+            $user->assignRole('pasien');
+
+            // Fix: pasien_number as string to avoid integer overflow
+            $pasien_number = (string)(time() . '000' . $user->id);
+
+            $user->pasien()->create([
+                'pasien_number'   => $pasien_number,
+                'date_of_birth'   => $data['date_of_birth'] ?? null,
+                'place_of_birth'  => $data['place_of_birth'] ?? null,
+                'blood_type'      => $data['blood_type'] ?? null,
+                'bpjs_number'     => $data['bpjs_number'] ?? null,
+            ]);
 
             return ['status' => 'success', 'message' => 'User created successfully'];
         } catch (\Exception $e) {

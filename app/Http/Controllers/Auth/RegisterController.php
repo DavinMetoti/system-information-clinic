@@ -31,7 +31,7 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        return view('pages.content.register.index');
+        return view('auth.register.index');
     }
 
     /**
@@ -40,16 +40,26 @@ class RegisterController extends Controller
     public function store(StoreRequest $request)
     {
         $validated = $request->validated();
+        $validated['role'] = 'pasien';
 
         try {
-            $user = $this->registerRepository->register($validated);
+            $result = $this->registerRepository->register($validated);
 
-            return response()->json([
-                'message' => 'User successfully registered!',
-                'user' => $user,
-            ], Response::HTTP_CREATED);
+            if ($result['status'] === 'success') {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'User successfully registered!',
+                ], Response::HTTP_CREATED);
+            } else {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'User registration failed!',
+                    'error' => $result['message'],
+                ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            }
         } catch (\Exception $e) {
             return response()->json([
+                'status' => 'error',
                 'message' => 'User registration failed!',
                 'error' => $e->getMessage(),
             ], Response::HTTP_INTERNAL_SERVER_ERROR);

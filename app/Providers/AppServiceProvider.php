@@ -5,18 +5,18 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 
 // Interfaces
-use App\Http\Contracts\Auth\RegisterRepositoryInterface;
 use App\Http\Contracts\Auth\LoginRepositoryInterface;
-use App\Http\Contracts\Apps\SupplierRepositoryInterface;
-use App\Http\Contracts\Apps\CategoryRepositoryInterface;
-use App\Http\Contracts\Apps\ProductRepositoryInterface;
+use App\Http\Contracts\Auth\RegisterRepositoryInterface;
+use App\Http\Contracts\Apps\MedicalRecordRepositoryInterface;
+use App\Http\Contracts\Auth\RegisterDoctorRepositoryInterface;
+use App\Http\Contracts\Apps\SpecializationRepositoryInterface;
 
 // Repository
-use App\Http\Repositories\Auth\RegisterRepository;
-use App\Http\Repositories\Apps\SupplierRepository;
-use App\Http\Repositories\Apps\CategoryRepository;
-use App\Http\Repositories\Apps\ProductRepository;
 use App\Http\Repositories\Auth\LoginRepository;
+use App\Http\Repositories\Auth\RegisterRepository;
+use App\Http\Repositories\Apps\MedicalRecordRepository;
+use App\Http\Repositories\Apps\SpecializationRepository;
+use App\Http\Repositories\Auth\RegisterDoctorRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,15 +25,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // Apps
-        $this->app->bind(SupplierRepositoryInterface::class, SupplierRepository::class);
-        $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
-        $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
-
         // Auth
         $this->app->bind(RegisterRepositoryInterface::class, RegisterRepository::class);
         $this->app->bind(LoginRepositoryInterface::class, LoginRepository::class);
+        $this->app->bind(RegisterDoctorRepositoryInterface::class, RegisterDoctorRepository::class);
 
+        // Apps
+        $this->app->bind(SpecializationRepositoryInterface::class, SpecializationRepository::class);
+        $this->app->bind(MedicalRecordRepositoryInterface::class, MedicalRecordRepository::class);
     }
 
     /**

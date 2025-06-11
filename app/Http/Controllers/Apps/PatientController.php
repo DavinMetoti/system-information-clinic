@@ -65,7 +65,6 @@ class PatientController extends Controller
 
             return redirect()->back()->with('success', $result['message']);
         } catch (\Exception $e) {
-            dd($e);
             return redirect()->back()->with('error', 'An error occurred while updating the patient.');
         }
     }

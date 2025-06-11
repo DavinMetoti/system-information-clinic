@@ -7,7 +7,6 @@ export default class LetterAvatar {
         const nameParts = this.name.split(' ');
         let initials = '';
 
-        // Ambil dua huruf pertama dari nama lengkap
         initials += nameParts[0].charAt(0).toUpperCase();
         if (nameParts.length > 1) {
             initials += nameParts[1].charAt(0).toUpperCase();

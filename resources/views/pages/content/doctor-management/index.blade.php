@@ -91,9 +91,8 @@
                             data: 'doctor.registration_number',
                             name: 'doctor.registration_number',
                             orderable: false,
-                            className: 'text-start', // rata kiri
+                            className: 'text-start',
                             render: function(data) {
-                                // Pastikan angka panjang tetap rata kiri sebagai string
                                 return `<span class="d-inline-block text-start" style="min-width:120px;">${data ? data : '-'}</span>`;
                             }
                         },
@@ -148,7 +147,7 @@
                             }
                         }
                     ],
-                    order: [[2, 'asc']], // order by 'name' (index 2)
+                    order: [[2, 'asc']],
                 },
                 on: {
                     edit: function () {

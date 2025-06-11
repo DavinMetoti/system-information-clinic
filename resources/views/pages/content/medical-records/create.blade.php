@@ -108,7 +108,6 @@
         }
 
         $(document).ready(function () {
-            // Prescription dynamic add/remove
             let prescriptionIndex = 1;
             $('#add-prescription').on('click', function() {
                 let html = `
@@ -145,13 +144,11 @@
 
             $(document).on('click', '.remove-prescription', function() {
                 $(this).closest('.prescription-item').remove();
-                // Hide remove button if only one left
                 if ($('#prescription-list .prescription-item').length === 1) {
                     $('#prescription-list .remove-prescription').hide();
                 }
             });
 
-            // Hide remove button if only one prescription
             if ($('#prescription-list .prescription-item').length === 1) {
                 $('#prescription-list .remove-prescription').hide();
             }
@@ -159,7 +156,6 @@
             $('#medical-record-create_form').on('submit', function (e) {
                 e.preventDefault();
 
-                // Convert prescription fields to JSON string
                 let prescriptions = [];
                 $('#prescription-list .prescription-item').each(function() {
                     let name = $(this).find('input[name*="[name]"]').val();

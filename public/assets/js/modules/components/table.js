@@ -6,7 +6,7 @@ export class TableManager {
         this.datatableOptions = options.datatable || {};
         this.eventHandlers = options.on || {};
         this.tableInstance = null;
-        this.filter = null; // Add a filter property
+        this.filter = null;
 
         this.init();
     }
@@ -138,14 +138,12 @@ export class TableManager {
     }
 
     reload(options = {}) {
-        // Update the filter if provided
         if (options.filter !== undefined) {
-            this.filter = options.filter; // Update the filter property
+            this.filter = options.filter;
         }
 
-        // Reload the table
         if (this.tableInstance) {
-            this.tableInstance.ajax.reload(null, false); // Pass `false` to prevent resetting pagination
+            this.tableInstance.ajax.reload(null, false);
         }
     }
 

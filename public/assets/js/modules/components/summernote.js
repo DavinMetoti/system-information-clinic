@@ -12,7 +12,6 @@ export class SummernoteEditor {
       return
     }
 
-    // Destroy existing instance if already initialized
     if ($(this.selector).data('summernote')) {
       $(this.selector).summernote('destroy')
     }
@@ -37,7 +36,7 @@ export class SummernoteEditor {
   }
 
   getHtml() {
-    return $(this.selector).summernote('code'); // Retrieve content as HTML
+    return $(this.selector).summernote('code');
   }
 
   destroy() {

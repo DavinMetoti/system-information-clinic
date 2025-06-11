@@ -31,13 +31,17 @@ Route::middleware(['auth'])->prefix('app')->name('app.')->group(function () {
 });
 
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-    Route::resource('doctor-management', DoctorManagementController::class);
-    Route::resource('specialization', SpecializationController::class);
+    Route::resource('doctor-management', DoctorManagementController::class)->middleware('permission:manage doctors');
+    Route::resource('specialization', SpecializationController::class)->middleware('permission:manage doctors');
 });
 
 Route::middleware(['auth'])->prefix('doctor')->name('doctor.')->group(function () {
-    Route::resource('patient', PatientController::class);
-    Route::resource('medical-record', MedicalRecordController::class);
+    Route::resource('patient', PatientController::class)->middleware('permission:manage patients');
+    Route::resource('medical-record', MedicalRecordController::class)
+        ->middleware('permission:manage medical records');
+    Route::get('medical-record/{medical_record}', [MedicalRecordController::class, 'show'])
+        ->name('medical-record.show')
+        ->middleware('permission:view own medical records');
 });
 
 Route::middleware(['auth'])->prefix('datatable')->name('datatable.')->group(function () {

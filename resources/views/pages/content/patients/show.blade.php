@@ -62,7 +62,7 @@
                             <div class="col-12 col-sm-auto">
                                 <input class="d-none" id="avatarFile" type="file">
                                 <label class="cursor-pointer avatar avatar-5xl" for="avatarFile">
-                                    <img class="" id="logo-patient" alt="" src="{{ $patient->avatar ?? '/default-avatar.png' }}">
+                                    <img class="" id="logo-patient" alt="" src="{{ $patient->avatar ?? 'https://www.garrickadenbuie.com/blog/process-profile-picture-magick/index_files/figure-html/resized-cropped-1.png' }}">
                                 </label>
                             </div>
                             <div class="col-12 col-sm-auto flex-1">

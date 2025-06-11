@@ -27,8 +27,6 @@ class RoleAndPermissionSeeder extends Seeder
         // Assign Permissions to Roles
         $adminRole->givePermissionTo([
             'manage doctors',
-            'manage patients',
-            'manage medical records',
         ]);
 
         $doctorRole->givePermissionTo([

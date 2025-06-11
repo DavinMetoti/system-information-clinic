@@ -77,8 +77,6 @@ Berikut adalah gambaran skema database utama berdasarkan migration:
 ![ERD](erd-wasic.png)
 
 > File ERD dapat ditemukan di `erd-wasic.png`.
-> Jika belum tersedia, silakan generate ERD dari migration menggunakan tools seperti [laravel-erd-generator](https://github.com/mitulgolakiya/laravel-erd) atau [dbdiagram.io](https://dbdiagram.io).
-
 ---
 
 ## 🛠️ Source & Teknologi

@@ -8,6 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Http\Contracts\Auth\LoginRepositoryInterface;
 use App\Http\Contracts\Auth\RegisterRepositoryInterface;
 use App\Http\Contracts\Apps\MedicalRecordRepositoryInterface;
+use App\Http\Contracts\Apps\PatientRepositoryInterface;
 use App\Http\Contracts\Auth\RegisterDoctorRepositoryInterface;
 use App\Http\Contracts\Apps\SpecializationRepositoryInterface;
 
@@ -15,6 +16,7 @@ use App\Http\Contracts\Apps\SpecializationRepositoryInterface;
 use App\Http\Repositories\Auth\LoginRepository;
 use App\Http\Repositories\Auth\RegisterRepository;
 use App\Http\Repositories\Apps\MedicalRecordRepository;
+use App\Http\Repositories\Apps\PatientRepository;
 use App\Http\Repositories\Apps\SpecializationRepository;
 use App\Http\Repositories\Auth\RegisterDoctorRepository;
 
@@ -33,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
         // Apps
         $this->app->bind(SpecializationRepositoryInterface::class, SpecializationRepository::class);
         $this->app->bind(MedicalRecordRepositoryInterface::class, MedicalRecordRepository::class);
+        $this->app->bind(PatientRepositoryInterface::class, PatientRepository::class);
     }
 
     /**

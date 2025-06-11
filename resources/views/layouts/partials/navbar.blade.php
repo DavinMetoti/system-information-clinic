@@ -79,7 +79,7 @@
                     <h6 class="dropdown-header text-body-highlight fs-9 border-bottom border-translucent py-2 lh-sm">Members</h6>
                     <div class="py-2"><a class="dropdown-item py-2 d-flex align-items-center" href="pages/members.html">
                             <div class="avatar avatar-l status-online  me-2 text-body">
-                                <img class="rounded-circle " src="{{ asset('assets/img/team/40x40/10.webp') }}" alt="" />
+                                <img class="rounded-circle " src="https://www.garrickadenbuie.com/blog/process-profile-picture-magick/index_files/figure-html/resized-cropped-1.png" alt="" />
                             </div>
                             <div class="flex-1">
                                 <h6 class="mb-0 text-body-highlight title">Carry Anna</h6>
@@ -88,7 +88,7 @@
                         </a>
                         <a class="dropdown-item py-2 d-flex align-items-center" href="pages/members.html">
                             <div class="avatar avatar-l  me-2 text-body">
-                                <img class="rounded-circle " src="{{ asset('assets/img/team/40x40/12.webp') }}" alt="" />
+                                <img class="rounded-circle " src="https://www.garrickadenbuie.com/blog/process-profile-picture-magick/index_files/figure-html/resized-cropped-1.png" alt="" />
                             </div>
                             <div class="flex-1">
                                 <h6 class="mb-0 text-body-highlight title">John Smith</h6>
@@ -123,7 +123,7 @@
         <li class="nav-item dropdown">
             <a class="nav-link lh-1 pe-0" id="navbarDropdownUser" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
                 <div class="avatar avatar-l ">
-                    <img class="rounded-circle " src="{{ asset('assets/img/team/40x40/57.webp') }}" alt="" />
+                    <img class="rounded-circle " src="https://www.garrickadenbuie.com/blog/process-profile-picture-magick/index_files/figure-html/resized-cropped-1.png" alt="" />
                 </div>
             </a>
             <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-profile shadow border" aria-labelledby="navbarDropdownUser">
@@ -131,10 +131,11 @@
                     <div class="card-body p-0">
                         <div class="text-center pt-4 pb-3">
                             <div class="avatar avatar-xl ">
-                                <img class="rounded-circle " src="{{ asset('assets/img/team/72x72/57.webp') }}" alt="" />
+                                <img class="rounded-circle " src="https://www.garrickadenbuie.com/blog/process-profile-picture-magick/index_files/figure-html/resized-cropped-1.png" alt="" />
                             </div>
                             <h6 class="mt-2 text-body-emphasis">{{ auth()->user()->name }}</h6>
                         </div>
+                        @if (auth()->user()->hasRole('pasien'))
                         <div class="overflow-auto scrollbar">
                             <ul class="nav d-flex flex-column mb-2 pb-1">
                                 <li class="nav-item">
@@ -142,6 +143,7 @@
                                 </li>
                             </ul>
                         </div>
+                        @endif
                     </div>
                     <div class="card-footer p-0 border-top border-translucent">
                         <div class="px-3 pb-3 mt-3">

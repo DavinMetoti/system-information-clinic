@@ -79,11 +79,11 @@ class PatientController extends Controller
     public function destroy(string $id)
     {
         try {
-            $deleted = $this->patientRepository->deletePatient($id);
-            if (!$deleted) {
-                return redirect()->route('apps.profile.index')->with('error', 'Patient not found or could not be deleted.');
+            $result = $this->patientRepository->deletePatient($id);
+            if ($result['status'] === 'error') {
+                return redirect()->route('apps.profile.index')->with('error', $result['message'] ?? 'Patient not found or could not be deleted.');
             }
-            return redirect()->route('apps.profile.index')->with('success', 'Patient deleted successfully.');
+            return redirect()->route('apps.profile.index')->with('success', $result['message'] ?? 'Patient deleted successfully.');
         } catch (\Exception $e) {
             return redirect()->route('apps.profile.index')->with('error', 'An error occurred while deleting the patient.');
         }

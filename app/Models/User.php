@@ -73,4 +73,12 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserDoctor::class, 'user_id');
     }
+
+    /**
+     * Relasi ke MedicalRecord
+     */
+    public function medicalRecords()
+    {
+        return $this->hasMany(MedicalRecord::class, 'user_id');
+    }
 }

@@ -37,10 +37,17 @@ return [
             'title' => 'Dokter',
             'children' => [
                 [
-                    'title' => 'Medical Records',
-                    'icon' => 'fas fa-clipboard',
+                    'title' => 'Patients List',
+                    'icon' => 'fas fa-users',
                     'father' => '',
-                    'route' => 'admin.specialization.index',
+                    'route' => 'doctor.patient.index',
+                    'permission' => 'manage medical records',
+                ],
+                [
+                    'title' => 'Medical Records',
+                    'icon' => 'fas fa-file-medical',
+                    'father' => '',
+                    'route' => 'doctor.medical-record.index',
                     'permission' => 'manage medical records',
                 ],
             ],

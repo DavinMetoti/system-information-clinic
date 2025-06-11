@@ -20,10 +20,15 @@ class MedicalRecordRepository implements MedicalRecordRepositoryInterface
     {
         try {
             $medicalRecord = MedicalRecord::create([
-                'patient_id' => $data['patient_id'],
-                'doctor_id' => $data['doctor_id'],
-                'description' => $data['description'] ?? null,
-                'slug' => $data['slug'],
+                'user_id'      => $data['user_id'],
+                'doctor_id'    => $data['doctor_id'],
+                'date'         => $data['date'],
+                'complaint'    => $data['complaint'] ?? null,
+                'diagnosis'    => $data['diagnosis'] ?? null,
+                'treatment'    => $data['treatment'] ?? null,
+                'notes'        => $data['notes'] ?? null,
+                'prescription' => $data['prescription'] ?? null,
+                'status'       => $data['status'],
             ]);
             return [
                 'status' => 'success',
@@ -56,7 +61,15 @@ class MedicalRecordRepository implements MedicalRecordRepositoryInterface
      */
     public function datatable(Request $request)
     {
-        $query = MedicalRecord::query();
+        $query = MedicalRecord::with('doctor');
+
+        if ($request->has('patient_id') && $request->patient_id) {
+            $query->where('user_id', $request->patient_id);
+        }
+
+        if ($request->has('doctor_id') && $request->doctor_id) {
+            $query->where('doctor_id', $request->doctor_id);
+        }
 
         return DataTables::of($query)
             ->addIndexColumn()
@@ -93,10 +106,15 @@ class MedicalRecordRepository implements MedicalRecordRepositoryInterface
         $medicalRecord = $this->find($id);
         if ($medicalRecord) {
             $medicalRecord->update([
-                'patient_id' => $data['patient_id'],
-                'doctor_id' => $data['doctor_id'],
-                'description' => $data['description'] ?? null,
-                'slug' => Str::slug($data['name']),
+                'user_id'      => $data['user_id'],
+                'doctor_id'    => $data['doctor_id'],
+                'date'         => $data['date'],
+                'complaint'    => $data['complaint'] ?? null,
+                'diagnosis'    => $data['diagnosis'] ?? null,
+                'treatment'    => $data['treatment'] ?? null,
+                'notes'        => $data['notes'] ?? null,
+                'prescription' => $data['prescription'] ?? null,
+                'status'       => $data['status'],
             ]);
             return ['status' => 'success', 'message' => 'Medical record updated successfully.'];
         }

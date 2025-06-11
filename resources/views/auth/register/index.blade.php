@@ -183,7 +183,6 @@
                                             <div id="register-alert" style="display:none;" class="alert mt-3"></div>
                                             <script>
                                                 $(function () {
-                                                    // Password toggle
                                                     var $toggleBtn = $('.password-toggle-btn');
                                                     var $passwordInput = $('#password');
                                                     $toggleBtn.on('click', function (e) {
@@ -217,7 +216,6 @@
                                                         }
                                                     });
 
-                                                    // Handle AJAX register
                                                     $('#register-form').on('submit', function(e) {
                                                         e.preventDefault();
                                                         var $form = $(this);

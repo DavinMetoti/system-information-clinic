@@ -9,7 +9,7 @@ export class ToastRenderer {
             const container = document.createElement('div');
             container.id = this.containerId;
             container.className = 'position-fixed top-0 end-0 p-3';
-            container.style.zIndex = '1055'; // Bootstrap modal level
+            container.style.zIndex = '1055';
             document.body.appendChild(container);
         }
     }
@@ -50,7 +50,6 @@ export class ToastRenderer {
 
         document.getElementById(this.containerId).insertAdjacentHTML('beforeend', toastHtml);
 
-        // Auto-close toast after a delay (optional)
         setTimeout(() => {
             const toastElement = document.getElementById(toastId);
             toastElement.classList.add('fade');

@@ -15,7 +15,7 @@
 
 1. **Clone repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/DavinMetoti/system-information-clinic.git
    cd wasik
    ```
 

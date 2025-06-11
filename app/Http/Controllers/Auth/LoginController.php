@@ -50,6 +50,11 @@ class LoginController extends Controller
         ]);
     }
 
+    /**
+     * Log the user out.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function logout()
     {
         if ($this->loginRepository->logout()) {

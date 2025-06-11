@@ -17,8 +17,8 @@ interface RegisterDoctorRepositoryInterface
     /**
      * Get datatable of doctors.
      *
-     * @param Request $request
-     * @return mixed
+     * @param Request $request HTTP request containing datatable parameters.
+     * @return mixed Datatable result of doctors.
      */
     public function datatable(Request $request);
 

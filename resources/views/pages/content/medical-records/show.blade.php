@@ -78,9 +78,11 @@
                     @endif
                 </div>
                 <div class="d-flex gap-2 mt-4">
-                    <a href="{{ route('doctor.medical-record.edit', $medicalRecord->id) }}" class="btn btn-warning px-4">
-                        <span class="fw-semibold">Edit</span>
-                    </a>
+                    @if (auth()->user() && auth()->user()->role !== 'pasien')
+                        <a href="{{ route('doctor.medical-record.edit', $medicalRecord->id) }}" class="btn btn-warning px-4">
+                            <span class="fw-semibold">Edit</span>
+                        </a>
+                    @endif
                     <a href="{{ url()->previous() }}" class="btn btn-secondary px-4">
                         <span class="fw-semibold">Back</span>
                     </a>

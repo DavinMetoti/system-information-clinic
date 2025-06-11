@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Apps;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\Register\UpdateRequest;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
@@ -28,7 +29,10 @@ class PatientController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified patient.
+     *
+     * @param int $id
+     * @return \Illuminate\View\View
      */
     public function show($id)
     {
@@ -42,21 +46,54 @@ class PatientController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified patient in storage.
+     *
+     * @param UpdateRequest $request
+     * @param string $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRequest $request, string $id)
     {
-        //
+        $data = $request->validated();
+        try {
+            $result = $this->patientRepository->updatePatient($id, $data);
+
+
+            if ($result['status'] === 'error') {
+                return redirect()->back()->with('error', $result['message']);
+            }
+
+            return redirect()->back()->with('success', $result['message']);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while updating the patient.');
+        }
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified patient from storage.
+     *
+     * @param string $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $result = $this->patientRepository->deletePatient($id);
+            if ($result['status'] === 'error') {
+                return redirect()->route('apps.profile.index')->with('error', $result['message'] ?? 'Patient not found or could not be deleted.');
+            }
+            return redirect()->route('apps.profile.index')->with('success', $result['message'] ?? 'Patient deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('apps.profile.index')->with('error', 'An error occurred while deleting the patient.');
+        }
     }
 
+    /**
+     * Get datatable of patients.
+     *
+     * @param Request $request
+     * @return mixed
+     */
     public function datatable(Request $request)
     {
         return $this->patientRepository->datatable($request);

@@ -36,6 +36,9 @@ class RegisterController extends Controller
 
     /**
      * Handle user registration request.
+     *
+     * @param StoreRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreRequest $request)
     {
@@ -67,7 +70,9 @@ class RegisterController extends Controller
     }
 
     /**
-     * Handle user table.
+     * Show the form for creating a new user.
+     *
+     * @return \Illuminate\View\View
      */
     public function create() {
         $roles = Role::all();
@@ -77,7 +82,10 @@ class RegisterController extends Controller
     }
 
     /**
-     * Handle user table.
+     * Get datatable of users.
+     *
+     * @param Request $request
+     * @return mixed
      */
     public function datatable(Request $request) {
         return $this->registerRepository->datatable($request);
@@ -85,6 +93,9 @@ class RegisterController extends Controller
 
     /**
      * Show the form for editing the specified user.
+     *
+     * @param int $id
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
@@ -99,6 +110,10 @@ class RegisterController extends Controller
 
     /**
      * Update the specified user in storage.
+     *
+     * @param UpdateRequest $request
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateRequest $request, $id)
     {
@@ -121,6 +136,9 @@ class RegisterController extends Controller
 
     /**
      * Remove the specified user from storage.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {

@@ -9,8 +9,11 @@ use Illuminate\View\Component;
 class Breadcrumb extends Component
 {
     public $items;
+
     /**
      * Create a new component instance.
+     *
+     * @param array $items Breadcrumb items.
      */
     public function __construct($items)
     {
@@ -19,6 +22,8 @@ class Breadcrumb extends Component
 
     /**
      * Get the view / contents that represent the component.
+     *
+     * @return View|Closure|string
      */
     public function render(): View|Closure|string
     {

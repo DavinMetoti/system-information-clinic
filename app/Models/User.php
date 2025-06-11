@@ -59,7 +59,9 @@ class User extends Authenticatable
     }
 
     /**
-     * Relasi ke UserPasien
+     * Get the pasien (patient) profile associated with the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function pasien()
     {
@@ -67,7 +69,9 @@ class User extends Authenticatable
     }
 
     /**
-     * Relasi ke UserDoctor
+     * Get the doctor profile associated with the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function doctor()
     {
@@ -75,7 +79,9 @@ class User extends Authenticatable
     }
 
     /**
-     * Relasi ke MedicalRecord
+     * Get the medical records associated with the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function medicalRecords()
     {

@@ -46,7 +46,10 @@ class RegisterRepository implements RegisterRepositoryInterface
     }
 
     /**
-     * Handle the user datatable.
+     * Get datatable of users.
+     *
+     * @param Request $request HTTP request containing datatable parameters.
+     * @return mixed Datatable result of users.
      */
     public function datatable(Request $request)
     {

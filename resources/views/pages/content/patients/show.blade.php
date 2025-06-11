@@ -6,9 +6,22 @@
         ['title' => 'Detail Pasien', 'url' => '#']
     ]" />
 <div class="row align-items-center justify-content-between g-3 mb-4">
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="col-auto">
         <h2 class="mb-0">Profile</h2>
     </div>
+    @if (auth()->user() && auth()->user()->role !== 'pasien')
     <div class="col-auto">
         <div class="row g-2 g-sm-3">
             <div class="col-auto">
@@ -18,6 +31,7 @@
             </div>
         </div>
     </div>
+    @endif
 </div>
 <div id="skeleton-loader">
     <div class="placeholder-glow">
@@ -38,7 +52,6 @@
     </div>
 </div>
 
-{{-- ...existing code... --}}
 <div id="actual-content" style="display: none;">
     <div class="row g-3 mb-3">
         <div class="col-12 col-lg-8">
@@ -182,6 +195,14 @@
                                 </span>
                             </a>
                         </li>
+                        @if (auth()->user() && auth()->user()->role === 'pasien')
+                        <li class="nav-item me-3" role="presentation">
+                            <a class="nav-link text-nowrap" id="update-profile-tab" data-bs-toggle="tab" href="#tab-update-profile" role="tab" aria-controls="tab-update-profile" aria-selected="false">
+                                <span class="fas fa-user-edit me-2"></span>
+                                Update Profile
+                            </a>
+                        </li>
+                        @endif
                     </ul>
                 </div>
                 <div class="tab-content" id="profileTabContent">
@@ -208,6 +229,83 @@
                             </div>
                         </div>
                     </div>
+                    @if (auth()->user() && auth()->user()->role === 'pasien')
+                    <div class="tab-pane fade" id="tab-update-profile" role="tabpanel" aria-labelledby="update-profile-tab">
+                        <div class="border-top border-bottom border-translucent py-4">
+                            <form method="POST" action="{{ route('doctor.patient.update', $patient->id) }}">
+                                @csrf
+                                @method('PUT')
+                                <div class="row mb-3">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="name" class="form-label">Name</label>
+                                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $patient->name) }}" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $patient->email) }}" required>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="password" class="form-label">Password <span class="text-muted">(leave blank if not changing)</span></label>
+                                        <input type="password" class="form-control" id="password" name="password" autocomplete="new-password">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="password_confirmation" class="form-label">Confirm Password</label>
+                                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" autocomplete="new-password">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="contact" class="form-label">Contact</label>
+                                        <input type="text" class="form-control" id="contact" name="contact" value="{{ old('contact', $patient->contact) }}">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="address" class="form-label">Address</label>
+                                        <input type="text" class="form-control" id="address" name="address" value="{{ old('address', $patient->address) }}">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="gender" class="form-label">Gender</label>
+                                        <select class="form-select" id="gender" name="gender" required>
+                                            <option value="">Select Gender</option>
+                                            <option value="Laki-laki" {{ ($patient->gender ?? '') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                                            <option value="Perempuan" {{ ($patient->gender ?? '') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="date_of_birth" class="form-label">Date of Birth</label>
+                                        <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" value="{{ old('date_of_birth', $patient->pasien->date_of_birth ?? '') }}">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="place_of_birth" class="form-label">Place of Birth</label>
+                                        <input type="text" class="form-control" id="place_of_birth" name="place_of_birth" value="{{ old('place_of_birth', $patient->pasien->place_of_birth ?? '') }}">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="blood_type" class="form-label">Blood Type</label>
+                                        <select class="form-select" id="blood_type" name="blood_type">
+                                            <option value="">Select Blood Type</option>
+                                            <option value="A" {{ old('blood_type', $patient->pasien->blood_type ?? '') == 'A' ? 'selected' : '' }}>A</option>
+                                            <option value="B" {{ old('blood_type', $patient->pasien->blood_type ?? '') == 'B' ? 'selected' : '' }}>B</option>
+                                            <option value="AB" {{ old('blood_type', $patient->pasien->blood_type ?? '') == 'AB' ? 'selected' : '' }}>AB</option>
+                                            <option value="O" {{ old('blood_type', $patient->pasien->blood_type ?? '') == 'O' ? 'selected' : '' }}>O</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="bpjs_number" class="form-label">BPJS Number</label>
+                                        <input type="text" class="form-control" id="bpjs_number" name="bpjs_number" value="{{ old('bpjs_number', $patient->pasien->bpjs_number ?? '') }}">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update Profile</button>
+                            </form>
+                        </div>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -217,11 +315,17 @@
 <script>
     const patient = @json($patient);
 
-    $(document).ready(function() {
-        const $logoElement = $('#logo-patient');
+    const urls = {
+        medicalRecordApi: "{{ route('doctor.medical-record.index') }}",
+        medicalRecordShow: "{{ route('doctor.medical-record.show', ['medical_record' => 'RECORD_ID']) }}",
+        medicalRecordEdit: "{{ route('doctor.medical-record.edit', ['medical_record' => 'RECORD_ID']) }}",
+    };
 
+    $(document).ready(function () {
+        const $logoElement = $('#logo-patient');
         const avatar = new App.LetterAvatar(patient.name);
         const avatarData = avatar.getAvatarWithColor();
+
         $logoElement.replaceWith(`
             <div style="background-color: ${avatarData.backgroundColor};
                 width: 100%; height: 100%;
@@ -231,15 +335,7 @@
                 ${avatarData.initials}
             </div>
         `);
-    });
 
-    const urls = {
-        medicalRecordApi: "{{ route('doctor.medical-record.index') }}",
-        medicalRecordShow: "{{ route('doctor.medical-record.show', ['medical_record' => 'RECORD_ID']) }}",
-        medicalRecordEdit: "{{ route('doctor.medical-record.edit', ['medical_record' => 'RECORD_ID']) }}"
-    };
-
-    $(document).ready(function () {
         new App.TableManager({
             csrfToken: "{{ csrf_token() }}",
             restApi: urls.medicalRecordApi,
@@ -308,10 +404,12 @@
                         render: function (data, type, row) {
                             const showUrl = urls.medicalRecordShow.replace('RECORD_ID', row.id);
                             const editUrl = urls.medicalRecordEdit.replace('RECORD_ID', row.id);
-                            return `
-                                <a class="btn btn-sm btn-info" href="${showUrl}" title="View"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-sm btn-warning" href="${editUrl}" title="Edit"><i class="fa fa-edit"></i></a>
-                            `;
+                            let actions = '';
+                            actions += `<a class="btn btn-sm btn-info" href="${showUrl}" title="View"><i class="fa fa-eye"></i></a> `;
+                            if (row.role && row.role !== 'pasien') {
+                                actions += `<a class="btn btn-sm btn-warning" href="${editUrl}" title="Edit"><i class="fa fa-edit"></i></a>`;
+                            }
+                            return actions;
                         }
                     }
                 ],

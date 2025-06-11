@@ -24,9 +24,13 @@ class UpdateRequest extends FormRequest
         return [
             'name'                  => 'required|string|max:255',
             'email'                 => 'required|string|email|max:255',
-            'password'              => 'sometimes|nullable|string|min:8|confirmed',
-            'password_confirmation' => 'nullable|string|min:8',
-            'role'                  => 'required|exists:roles,name',
+            'contact'               => 'nullable|string|max:15',
+            'address'               => 'nullable|string|max:255',
+            'gender'                => 'required|in:Laki-laki,Perempuan',
+            'date_of_birth'         => 'nullable|date',
+            'place_of_birth'        => 'nullable|string|max:255',
+            'blood_type'            => 'nullable|in:A,B,AB,O',
+            'bpjs_number'           => 'nullable|string|max:20',
         ];
     }
 }

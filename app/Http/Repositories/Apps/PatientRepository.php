@@ -28,7 +28,7 @@ class PatientRepository implements PatientRepositoryInterface
      */
     public function findPatientById($id): ?User
     {
-        return User::where('role', 'pasien')->find($id);
+        return User::with('pasien')->where('role', 'pasien')->find($id);
     }
 
     /**
@@ -41,18 +41,47 @@ class PatientRepository implements PatientRepositoryInterface
     public function updatePatient(int $id, array $data): array
     {
         $patient = $this->findPatientById($id);
-        if ($patient) {
-            $patient->update($data);
-            return ['status' => 'success', 'message' => 'Patient updated successfully.'];
+
+        if (!$patient) {
+            return [
+                'status' => 'error',
+                'message' => 'Patient not found.',
+                'data' => null
+            ];
         }
-        return ['status' => 'error', 'message' => 'Patient not found.'];
+
+        $patient->update($data);
+
+        $pasienData = [
+            'bpjs_number'   => $data['bpjs_number'] ?? null,
+            'date_of_birth' => $data['date_of_birth'] ?? null,
+            'place_of_birth'=> $data['place_of_birth'] ?? null,
+            'blood_type'    => $data['blood_type'] ?? null,
+        ];
+
+        if ($patient->relationLoaded('pasien') && $patient->pasien) {
+            $patient->pasien->fill($pasienData);
+            $patient->pasien->save();
+        } elseif ($patient->pasien()->exists()) {
+            $pasien = $patient->pasien()->first();
+            $pasien->fill($pasienData);
+            $pasien->save();
+        } else {
+            $patient->pasien()->create($pasienData);
+        }
+
+        return [
+            'status' => 'success',
+            'message' => 'Patient updated successfully.',
+            'data' => $patient->fresh('pasien')
+        ];
     }
 
     /**
      * Delete the specified patient.
      *
-     * @param int $id
-     * @return array
+     * @param int $id Patient ID.
+     * @return array Result of the delete operation.
      */
     public function deletePatient(int $id): array
     {
@@ -81,7 +110,10 @@ class PatientRepository implements PatientRepositoryInterface
     }
 
     /**
-     * Handle the user datatable.
+     * Get datatable of patients.
+     *
+     * @param Request $request HTTP request containing datatable parameters.
+     * @return mixed Datatable result of patients.
      */
     public function datatable(Request $request)
     {

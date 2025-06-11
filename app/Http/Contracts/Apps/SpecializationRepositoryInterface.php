@@ -9,47 +9,47 @@ interface SpecializationRepositoryInterface
     /**
      * Create a new specialization.
      *
-     * @param array $data
-     * @return mixed
+     * @param array $data Data for the new specialization.
+     * @return mixed Newly created specialization instance or identifier.
      */
     public function create(array $data);
 
     /**
      * Get all specializations.
      *
-     * @return mixed
+     * @return mixed List of all specializations.
      */
     public function getAll();
 
     /**
      * Get datatable of specializations.
      *
-     * @param Request $request
-     * @return mixed
+     * @param Request $request HTTP request containing datatable parameters.
+     * @return mixed Datatable result of specializations.
      */
     public function datatable(Request $request);
 
     /**
      * Find a specialization by ID.
      *
-     * @param int $id
-     * @return mixed
+     * @param int $id Specialization ID.
+     * @return mixed Specialization instance or null if not found.
      */
     public function find($id);
 
     /**
      * Update the specified specialization.
      *
-     * @param int $id
-     * @param array $data
-     * @return array
+     * @param int $id Specialization ID.
+     * @param array $data Data to update the specialization.
+     * @return array Updated specialization data.
      */
     public function update($id, array $data);
 
     /**
      * Delete the specified specialization.
      *
-     * @param int $id
+     * @param int $id Specialization ID.
      * @return void
      */
     public function delete($id);

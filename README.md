@@ -16,7 +16,7 @@
 1. **Clone repository**
    ```bash
    git clone https://github.com/DavinMetoti/system-information-clinic.git
-   cd wasik
+   cd system-information-clinic
    ```
 
 2. **Install dependency backend**

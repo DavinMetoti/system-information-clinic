@@ -49,7 +49,7 @@ class MedicalRecordController extends Controller
         $data['user_id'] = $request->query('patient_id') ?? $request->input('user_id') ?? auth()->user()->id;
         $data['doctor_id'] = auth()->id();
 
-        $data = $request->validated();
+        $data = array_merge($request->validated(), $data);
 
         $data['prescription'] = $request->input('prescription');
 

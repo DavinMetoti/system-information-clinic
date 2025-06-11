@@ -53,7 +53,10 @@ class RegisterDoctorRepository implements RegisterDoctorRepositoryInterface
     }
 
     /**
-     * Handle the user datatable.
+     * Get datatable of doctors.
+     *
+     * @param Request $request HTTP request containing datatable parameters.
+     * @return mixed Datatable result of doctors.
      */
     public function datatable(Request $request)
     {

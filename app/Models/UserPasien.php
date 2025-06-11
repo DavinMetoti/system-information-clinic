@@ -20,6 +20,11 @@ class UserPasien extends Model
         'updated_at' => 'datetime',
     ];
 
+    /**
+     * Get the user that owns the patient profile.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

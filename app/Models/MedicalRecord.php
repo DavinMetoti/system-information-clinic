@@ -18,18 +18,23 @@ class MedicalRecord extends Model
         'status',
     ];
 
+    /**
+     * Get the user associated with the medical record.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Get the doctor associated with the medical record.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function doctor()
     {
         return $this->belongsTo(User::class, 'doctor_id');
-    }
-
-    public function scopeDone($query)
-    {
-        return $query->where('status', 'done');
     }
 }

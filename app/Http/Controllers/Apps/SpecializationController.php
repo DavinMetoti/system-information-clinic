@@ -25,7 +25,10 @@ class SpecializationController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the specializations.
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
     {
@@ -37,7 +40,9 @@ class SpecializationController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new specialization.
+     *
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -45,7 +50,10 @@ class SpecializationController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created specialization in storage.
+     *
+     * @param StoreRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreRequest $request)
     {
@@ -76,7 +84,10 @@ class SpecializationController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified specialization.
+     *
+     * @param string $id
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
      */
     public function edit(string $id)
     {
@@ -90,7 +101,11 @@ class SpecializationController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified specialization in storage.
+     *
+     * @param UpdateRequest $request
+     * @param string $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateRequest $request, string $id)
     {
@@ -121,7 +136,10 @@ class SpecializationController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified specialization from storage.
+     *
+     * @param string $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(string $id)
     {
@@ -148,11 +166,23 @@ class SpecializationController extends Controller
         }
     }
 
+    /**
+     * Get datatable of specializations.
+     *
+     * @param Request $request
+     * @return mixed
+     */
     public function datatable(Request $request)
     {
         return $this->specializationRepository->datatable($request);
     }
 
+    /**
+     * Get limited specializations for select2 or similar search.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function select(Request $request)
     {
         try {

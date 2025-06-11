@@ -12,10 +12,11 @@ class Specialization extends Model
         'slug',
         'description',
     ];
+
     /**
-     * The attributes that should be hidden for serialization.
+     * The attributes that should be cast to native types.
      *
-     * @var list<string>
+     * @var array<string, string>
      */
     protected $casts = [
         'created_at' => 'datetime',

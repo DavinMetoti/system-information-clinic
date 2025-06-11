@@ -13,13 +13,20 @@ class MedicalRecordController extends Controller
 {
     protected $medicalRecordRepository;
 
+    /**
+     * MedicalRecordController constructor.
+     *
+     * @param MedicalRecordRepositoryInterface $medicalRecordRepository
+     */
     public function __construct(MedicalRecordRepositoryInterface $medicalRecordRepository)
     {
         $this->medicalRecordRepository = $medicalRecordRepository;
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the medical records.
+     *
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -27,7 +34,10 @@ class MedicalRecordController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new medical record.
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View
      */
     public function create(Request $request)
     {
@@ -41,7 +51,10 @@ class MedicalRecordController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created medical record in storage.
+     *
+     * @param StoreRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreRequest $request)
     {
@@ -70,7 +83,10 @@ class MedicalRecordController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified medical record.
+     *
+     * @param int $id
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
      */
     public function show($id)
     {
@@ -84,7 +100,10 @@ class MedicalRecordController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified medical record.
+     *
+     * @param int $id
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
      */
     public function edit($id)
     {
@@ -98,7 +117,11 @@ class MedicalRecordController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified medical record in storage.
+     *
+     * @param UpdateRequest $request
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateRequest $request, $id)
     {
@@ -119,7 +142,10 @@ class MedicalRecordController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified medical record from storage.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
@@ -138,6 +164,12 @@ class MedicalRecordController extends Controller
         }
     }
 
+    /**
+     * Get datatable of medical records.
+     *
+     * @param Request $request
+     * @return mixed
+     */
     public function datatable(Request $request)
     {
         return $this->medicalRecordRepository->datatable($request);

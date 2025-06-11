@@ -15,10 +15,10 @@ interface RegisterRepositoryInterface
     public function register(array $data);
 
     /**
-     * Register a new user and assign a role to the user.
+     * Get datatable of users.
      *
-     * @param array $data
-     * @return \App\Models\User
+     * @param Request $request HTTP request containing datatable parameters.
+     * @return mixed Datatable result of users.
      */
     public function datatable(Request $request);
 

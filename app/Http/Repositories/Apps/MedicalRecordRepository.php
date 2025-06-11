@@ -56,8 +56,8 @@ class MedicalRecordRepository implements MedicalRecordRepositoryInterface
     /**
      * Get datatable of medical records.
      *
-     * @param Request $request
-     * @return mixed
+     * @param Request $request HTTP request containing datatable parameters.
+     * @return mixed Datatable result of medical records.
      */
     public function datatable(Request $request)
     {
@@ -86,8 +86,8 @@ class MedicalRecordRepository implements MedicalRecordRepositoryInterface
     /**
      * Find a medical record by ID.
      *
-     * @param int $id
-     * @return MedicalRecord|null
+     * @param int $id Medical record ID.
+     * @return MedicalRecord|null Medical record instance or null if not found.
      */
     public function find($id): ?MedicalRecord
     {

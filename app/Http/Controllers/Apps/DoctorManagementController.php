@@ -152,6 +152,12 @@ class DoctorManagementController extends Controller
         }
     }
 
+    /**
+     * Get datatable of doctors.
+     *
+     * @param Request $request HTTP request containing datatable parameters.
+     * @return mixed Datatable result of doctors.
+     */
     public function datatable(Request $request)
     {
         return $this->doctorRepository->datatable($request);

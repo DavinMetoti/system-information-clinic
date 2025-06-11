@@ -83,9 +83,9 @@ class SpecializationRepository implements SpecializationRepositoryInterface
     /**
      * Update the specified specialization.
      *
-     * @param int $id
-     * @param array $data
-     * @return array
+     * @param int $id Specialization ID.
+     * @param array $data Data to update the specialization.
+     * @return array Updated specialization data or error message.
      */
     public function update($id, array $data): array
     {
@@ -104,8 +104,8 @@ class SpecializationRepository implements SpecializationRepositoryInterface
     /**
      * Delete the specified specialization.
      *
-     * @param int $id
-     * @return array
+     * @param int $id Specialization ID.
+     * @return array Result of the delete operation.
      */
     public function delete($id): array
     {
